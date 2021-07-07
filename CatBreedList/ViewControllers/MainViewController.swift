@@ -19,6 +19,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         backgroundView.backgroundColor = .systemGray4
         
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
         downloadJson()
     }
     
@@ -49,6 +52,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return KeyVariables.MyVariables.cats.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        KeyVariables.MyVariables.index = indexPath.row
+        
+        navigationController?.pushViewController(storyboard?.instantiateViewController(withIdentifier: "AnimalViewController") as! AnimalViewController, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CatCell") as? CatCell else {
             return UITableViewCell()
@@ -58,10 +67,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.dateOB.text = KeyVariables.MyVariables.cats[indexPath.row].lifeSpan
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
     }
 }
 
