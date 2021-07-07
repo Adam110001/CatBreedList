@@ -21,10 +21,23 @@ class AnimalViewController: UIViewController {
         
         background.backgroundColor = .systemGray4
         
+        searchInternet.setTitle("Read More", for: .normal)
+        searchInternet.backgroundColor = .white
+        searchInternet.setTitleColor(.black, for: .normal)
+        searchInternet.layer.cornerRadius = 12
+        searchInternet.layer.masksToBounds = true
+        searchInternet.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        
         self.title = KeyVariables.MyVariables.cats[KeyVariables.MyVariables.index].name
         desParLabel.text = KeyVariables.MyVariables.cats[KeyVariables.MyVariables.index].welcomeDescription
+        
+        let url = URL(string: KeyVariables.MyVariables.cats[KeyVariables.MyVariables.index].image!.url!)
+        let data = try? Data(contentsOf: url!)
+        imageView.image = UIImage(data: data!)
+        
     }
     
+    //MARK - Search Button function
     @IBAction func searchIntenetAction(_ sender: Any) {
         guard let url = URL(string: KeyVariables.MyVariables.cats[KeyVariables.MyVariables.index].wikipediaURL!) else {
             return

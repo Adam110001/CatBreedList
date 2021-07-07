@@ -25,6 +25,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         downloadJson()
     }
     
+    // MARK - JSON function
     func downloadJson() {
         guard let downloadURL = url else { return }
         
@@ -48,6 +49,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }.resume()
     }
     
+    // MARK - TableView functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return KeyVariables.MyVariables.cats.count
     }
